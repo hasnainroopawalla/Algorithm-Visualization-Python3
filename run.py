@@ -18,9 +18,8 @@ def randomposition():
 def addnode():
     x, y = randomposition()
     color = randomcolor()
-    rectangle = pygame.rect.Rect(x, y, 37, 37)
-    rect = {'rect':rectangle, 'dragging':False, 'color':color}
-    nodes.append(rect)
+    rectangle = pygame.rect.Rect(x, y, 37, 37) 
+    nodes.append({'rect':rectangle, 'dragging':False, 'color':color})
 
 
 # Initialize Screen
@@ -39,7 +38,7 @@ pygame.display.set_caption("Graph")
 # Initialize Screen
 
 
-addnodebutton = pygame.rect.Rect(750, 550, 37, 37)  # Add Node Button
+addnodebutton = pygame.rect.Rect(740, 555, 50, 37)  # Add Node Button
 
 clock = pygame.time.Clock()
 
@@ -48,6 +47,8 @@ running = True
 while running:
 
     for event in pygame.event.get():
+
+        mx, my = pygame.mouse.get_pos()
 
         if event.type == pygame.QUIT:
             running = False
@@ -78,6 +79,17 @@ while running:
                     mouse_x, mouse_y = event.pos
                     node['rect'].x = mouse_x + offset_x
                     node['rect'].y = mouse_y + offset_y
+        
+        
+        #print(x,y)
+        elif event.type == pygame.KEYDOWN:
+            print(pygame.KEYDOWN)
+            if event.type == pygame.K_1:
+                print(mx,my)
+                print()
+                for node in nodes:
+                    if node['rect'].collidepoint((mx, my)):
+                        print('rectangle selected')
 
     screen.fill(WHITE)
 
