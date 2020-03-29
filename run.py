@@ -1,6 +1,26 @@
 import pygame
+import random
 
-# --- constants --- (UPPER_CASE names)
+nodes = []
+nodes_dragging = []
+
+def randomcolor():
+    r = random.randrange(0, 255)
+    g = random.randrange(0, 255)
+    b = random.randrange(0, 255) 
+    return (r, g, b)
+
+def randomposition():
+    x = random.randrange(0, 750)
+    y = random.randrange(0, 550)
+    return x, y
+
+def addnode():
+    x, y = randomposition()
+    color = randomcolor()
+    rectangle = pygame.rect.Rect(x, y, 37, 37)
+    rect = {'rect':rectangle, 'dragging':False, 'color':color}
+    nodes.append(rect)
 
 
 # Initialize Screen
@@ -19,13 +39,7 @@ pygame.display.set_caption("Graph")
 # Initialize Screen
 
 
-# rectangle = pygame.rect.Rect(176, 134, 37, 37)
-# rectangle_draging = False
-
-# rectangle2 = pygame.rect.Rect(270, 134, 37, 37)
-# rectangle2_draging = False
-
-addnode = pygame.rect.Rect(750, 550, 37, 37)  # Add Node Button
+addnodebutton = pygame.rect.Rect(750, 550, 37, 37)  # Add Node Button
 
 clock = pygame.time.Clock()
 
@@ -40,46 +54,37 @@ while running:
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                if addnode.collidepoint(event.pos):  # Add Node Button
-                    print('add')
 
-                elif rectangle.collidepoint(event.pos):
-                    rectangle_draging = True
-                    mouse_x, mouse_y = event.pos
-                    offset_x = rectangle.x - mouse_x
-                    offset_y = rectangle.y - mouse_y
-                elif rectangle2.collidepoint(event.pos):
-                    rectangle2_draging = True
-                    mouse_x, mouse_y = event.pos
-                    offset_x = rectangle2.x - mouse_x
-                    offset_y = rectangle2.y - mouse_y
+                if addnodebutton.collidepoint(event.pos):  # Add Node Button
+                    addnode()
+
+                else:
+                    for node in nodes:
+                        if node['rect'].collidepoint(event.pos):
+                            node['dragging'] = True
+                            mouse_x, mouse_y = event.pos
+                            offset_x = node['rect'].x - mouse_x
+                            offset_y = node['rect'].y - mouse_y
 
         elif event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:            
-                rectangle_draging = False           
-                rectangle2_draging = False
+                for node in nodes:
+                    if node['rect'].collidepoint(event.pos):
+                        node['dragging'] = False
 
         elif event.type == pygame.MOUSEMOTION:
-            if rectangle_draging:
-                mouse_x, mouse_y = event.pos
-                rectangle.x = mouse_x + offset_x
-                rectangle.y = mouse_y + offset_y
-            elif rectangle2_draging:
-                mouse_x, mouse_y = event.pos
-                rectangle2.x = mouse_x + offset_x
-                rectangle2.y = mouse_y + offset_y
-
-    # - updates (without draws) -
-
-    # empty
-
-    # - draws (without updates) -
+            for node in nodes:
+                if node['dragging']:
+                    mouse_x, mouse_y = event.pos
+                    node['rect'].x = mouse_x + offset_x
+                    node['rect'].y = mouse_y + offset_y
 
     screen.fill(WHITE)
 
-    pygame.draw.rect(screen, RED, rectangle)
-    pygame.draw.rect(screen, BLUE, rectangle2)
-    pygame.draw.rect(screen, GREEN, addnode)
+    pygame.draw.rect(screen, GREEN, addnodebutton)
+
+    for i in nodes:
+        pygame.draw.rect(screen, i['color'], i['rect'])
 
 
     pygame.display.flip()
