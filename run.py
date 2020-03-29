@@ -2,7 +2,7 @@ import pygame
 import random
 
 nodes = []
-nodes_dragging = []
+nodes_text = []
 
 def randomcolor():
     r = random.randrange(0, 255)
@@ -18,11 +18,14 @@ def randomposition():
 def addnode():
     x, y = randomposition()
     color = randomcolor()
+    txt = chr(len(nodes)+65)
     rectangle = pygame.rect.Rect(x, y, 37, 37) 
-    text_surface = font.render(ichr(len(nodes)+65), True, (0,0,0))
-    nodes.append({'rect':rectangle, 'dragging':False, 'color':color, 'id':chr(len(nodes)+65)})
 
 
+    node_text = font.render(txt, True, (0,0,0))
+    nodes_text.append({'text':node_text, 'dragging':False, 'pos':(x+12, y+12), 'id':txt})
+
+    nodes.append({'rect':rectangle, 'dragging':False, 'color':color, 'id':txt})
 
 
 # Initialize Screen
@@ -63,7 +66,7 @@ while running:
                 if addnodebutton.collidepoint(event.pos):  # Add Node Button
                     addnode()
 
-                else:
+                else:  # Dragging
                     for node in nodes:
                         if node['rect'].collidepoint(event.pos):
                             node['dragging'] = True
@@ -76,6 +79,11 @@ while running:
                 for node in nodes:
                     if node['rect'].collidepoint(event.pos):
                         node['dragging'] = False
+                        print()
+                        for t in nodes_text:
+                            if (t['id']==node['id']):
+                                t['pos'] = (node['rect'][0]+12, node['rect'][1]+12)
+                                break
 
         elif event.type == pygame.MOUSEMOTION:
             for node in nodes:
@@ -98,11 +106,10 @@ while running:
 
     for i in nodes:
         pygame.draw.rect(screen, i['color'], i['rect'])
-        print(i['rect'])
-        print(i['rect'][0],i['rect'][1])
-        text_surface = font.render(i['id'], True, (0,0,0))
-        screen.blit(text_surface, (140,10))
+        
 
+    for i in nodes_text:
+        screen.blit(i['text'], i['pos'])
 
     pygame.display.flip()
 
