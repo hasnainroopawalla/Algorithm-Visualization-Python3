@@ -19,7 +19,10 @@ def addnode():
     x, y = randomposition()
     color = randomcolor()
     rectangle = pygame.rect.Rect(x, y, 37, 37) 
-    nodes.append({'rect':rectangle, 'dragging':False, 'color':color})
+    text_surface = font.render(ichr(len(nodes)+65), True, (0,0,0))
+    nodes.append({'rect':rectangle, 'dragging':False, 'color':color, 'id':chr(len(nodes)+65)})
+
+
 
 
 # Initialize Screen
@@ -33,6 +36,7 @@ BLUE   = (0, 0, 255)
 
 FPS = 60
 pygame.init()
+font = pygame.font.Font("freesansbold.ttf", 15)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Graph")
 # Initialize Screen
@@ -83,13 +87,10 @@ while running:
         
         #print(x,y)
         elif event.type == pygame.KEYDOWN:
-            print(pygame.KEYDOWN)
-            if event.type == pygame.K_1:
-                print(mx,my)
-                print()
+            if pygame.key.name(event.key)=='a':
                 for node in nodes:
                     if node['rect'].collidepoint((mx, my)):
-                        print('rectangle selected')
+                        print(node['id'])
 
     screen.fill(WHITE)
 
@@ -97,6 +98,10 @@ while running:
 
     for i in nodes:
         pygame.draw.rect(screen, i['color'], i['rect'])
+        print(i['rect'])
+        print(i['rect'][0],i['rect'][1])
+        text_surface = font.render(i['id'], True, (0,0,0))
+        screen.blit(text_surface, (140,10))
 
 
     pygame.display.flip()
