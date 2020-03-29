@@ -79,8 +79,8 @@ while running:
                 for node in nodes:
                     if node['rect'].collidepoint(event.pos):
                         node['dragging'] = False
-                        print()
-                        for t in nodes_text:
+    
+                        for t in nodes_text:  # Move Text
                             if (t['id']==node['id']):
                                 t['pos'] = (node['rect'][0]+12, node['rect'][1]+12)
                                 break
