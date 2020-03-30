@@ -1,5 +1,6 @@
 import pygame
 import random
+import bfs
 
 nodes = []
 nodes_text = []
@@ -8,8 +9,16 @@ source = ''
 destination = ''
 
 def createlink(slink, dlink):
-    print(slink, dlink)
-
+    if dlink not in graph[slink]:
+        graph[slink].append(dlink)
+    
+    if slink not in graph[dlink]:
+        graph[dlink].append(slink)
+    else:
+        print('Route Exists')
+    
+def getpath():
+    print()
 
 def randomcolor():
     r = random.randrange(0, 255)
@@ -101,8 +110,12 @@ while running:
         
     
         elif event.type == pygame.KEYDOWN:
+
             if pygame.key.name(event.key)=='space':
                 print(graph)
+
+            elif pygame.key.name(event.key)=='return':
+                print(bfs.bfs_shortest_path(graph, source, destination))
 
             elif pygame.key.name(event.key)=='s': # SELECT SOURCE
                 for node in nodes:
