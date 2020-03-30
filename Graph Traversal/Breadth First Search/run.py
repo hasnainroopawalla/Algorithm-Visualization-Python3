@@ -66,7 +66,7 @@ addnodebutton = pygame.rect.Rect(740, 555, 50, 37)  # Add Node Button
 # Initialize Screen
 
 c = 0
-m = 0
+result = 0
 clock = pygame.time.Clock()
 
 running = True
@@ -119,7 +119,8 @@ while running:
                 print(graph)
 
             elif pygame.key.name(event.key)=='return':
-                print(bfs.bfs_shortest_path(graph, source, destination))
+                result = bfs.bfs_shortest_path(graph, source, destination)
+               
 
             elif pygame.key.name(event.key)=='s': # SELECT SOURCE
                 for node in nodes:
@@ -159,21 +160,24 @@ while running:
     for i in nodes_text:
         screen.blit(i['text'], i['pos'])
 
-    for i in graph:
-        
+    for i in graph:  # Draw Links
         for node in nodes:   # get coordinates
             if(node['id']==i):
                 sx, sy = node['rect'][0],node['rect'][1]
                 break
-
         for j in graph[i]:
-
             for node in nodes:   # get coordinates
                 if(node['id']==j):
                     dx, dy = node['rect'][0],node['rect'][1]
-                    break
-            
+                    break      
             pygame.draw.line(screen, (0,0,0), (sx, sy), (dx, dy))
+
+    if result:
+        
+        print(result)
+        
+
+        result = 0
 
 
     pygame.display.flip()
