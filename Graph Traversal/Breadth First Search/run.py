@@ -17,10 +17,8 @@ def createlink(slink, dlink):
        
         return 1
     else:
-        return 'Route Exists'
+        return 'Route Already Exists'
 
-    
-    
 def getpath():
     print()
 
@@ -154,14 +152,13 @@ while running:
     screen.blit(font.render('Destination: '+destination, True, (0,0,0)), (620, 579))
     screen.blit(font.render('ADD', True, (0,0,0)), (746, 567))
 
-    for i in nodes:
+    for i in nodes:  # Draw Nodes
         pygame.draw.rect(screen, i['color'], i['rect'])
         
-    for i in nodes_text:
+    for i in nodes_text:  # Draw Node Names
         screen.blit(i['text'], i['pos'])
 
-
-    
+ 
     for i in graph:  # Draw Links
         for node in nodes:   # get coordinates
             if(node['id']==i):
@@ -174,7 +171,7 @@ while running:
                     break      
             pygame.draw.line(screen, (0,0,0), (sx, sy), (dx, dy))
 
-    if result:
+    if result:  # Draw Result Path
         for i in range(len(result)):
             if (i==len(result)-1):
                 break
@@ -190,10 +187,6 @@ while running:
                         break
             
                 pygame.draw.line(screen, (255,0,0), (sx, sy), (dx, dy))
-            
-
-            #result = []
-
 
     pygame.display.flip()
     clock.tick(FPS)
