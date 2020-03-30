@@ -21,10 +21,10 @@ def bfs_shortest_path(graph, start, goal):
         if node not in explored:
             
             neighbours = graph[node]
-            print('node',node)
+            #print('node',node)
             
             for neighbour in neighbours:
-                print(neighbour)
+                #print(neighbour)
                 new_path = list(path)
                 new_path.append(neighbour)
                 queue.append(new_path)

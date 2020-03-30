@@ -12,10 +12,14 @@ def createlink(slink, dlink):
     if dlink not in graph[slink]:
         graph[slink].append(dlink)
     
-    if slink not in graph[dlink]:
-        graph[dlink].append(slink)
+        if slink not in graph[dlink]:
+            graph[dlink].append(slink)
+       
+        return 1
     else:
-        print('Route Exists')
+        return 'Route Exists'
+
+    
     
 def getpath():
     print()
@@ -62,7 +66,7 @@ addnodebutton = pygame.rect.Rect(740, 555, 50, 37)  # Add Node Button
 # Initialize Screen
 
 c = 0
-
+m = 0
 clock = pygame.time.Clock()
 
 running = True
@@ -154,6 +158,23 @@ while running:
         
     for i in nodes_text:
         screen.blit(i['text'], i['pos'])
+
+    for i in graph:
+        
+        for node in nodes:   # get coordinates
+            if(node['id']==i):
+                sx, sy = node['rect'][0],node['rect'][1]
+                break
+
+        for j in graph[i]:
+
+            for node in nodes:   # get coordinates
+                if(node['id']==j):
+                    dx, dy = node['rect'][0],node['rect'][1]
+                    break
+            
+            pygame.draw.line(screen, (0,0,0), (sx, sy), (dx, dy))
+
 
     pygame.display.flip()
     clock.tick(FPS)
