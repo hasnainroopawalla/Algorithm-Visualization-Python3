@@ -66,7 +66,7 @@ addnodebutton = pygame.rect.Rect(740, 555, 50, 37)  # Add Node Button
 # Initialize Screen
 
 c = 0
-result = 0
+result = []
 clock = pygame.time.Clock()
 
 running = True
@@ -160,10 +160,12 @@ while running:
     for i in nodes_text:
         screen.blit(i['text'], i['pos'])
 
+
+    
     for i in graph:  # Draw Links
         for node in nodes:   # get coordinates
             if(node['id']==i):
-                sx, sy = node['rect'][0],node['rect'][1]
+                sx, sy = node['rect'][0], node['rect'][1]
                 break
         for j in graph[i]:
             for node in nodes:   # get coordinates
@@ -173,14 +175,27 @@ while running:
             pygame.draw.line(screen, (0,0,0), (sx, sy), (dx, dy))
 
     if result:
-        
-        print(result)
-        
+        for i in range(len(result)):
+            if (i==len(result)-1):
+                break
+            else:
+                for node in nodes:   # get coordinates
+                    if(node['id']==result[i]):
+                        sx, sy = node['rect'][0], node['rect'][1]
+                        break
+                
+                for node in nodes:   # get coordinates
+                    if(node['id']==result[i+1]):
+                        dx, dy = node['rect'][0], node['rect'][1]
+                        break
+            
+                pygame.draw.line(screen, (255,0,0), (sx, sy), (dx, dy))
+            
 
-        result = 0
+            #result = []
 
 
     pygame.display.flip()
     clock.tick(FPS)
-
+ 
 pygame.quit()
