@@ -1,121 +1,47 @@
-import pygame
-import random
+# sample graph implemented as a dictionary
+graph = {'A': ['B', 'C', 'E'],
+         'B': ['A','D', 'E'],
+         'C': ['A', 'F', 'G'],
+         'D': ['B'],
+         'E': ['A', 'B','D'],
+         'F': ['C'],
+         'G': ['C']}
 
-nodes = []
-nodes_text = []
-
-def randomcolor():
-    r = random.randrange(0, 255)
-    g = random.randrange(0, 255)
-    b = random.randrange(0, 255) 
-    return (r, g, b)
-
-def randomposition():
-    x = random.randrange(0, 750)
-    y = random.randrange(0, 550)
-    return x, y
-
-def addnode():
-    x, y = randomposition()
-    color = randomcolor()
-    txt = chr(len(nodes)+65)
-    rectangle = pygame.rect.Rect(x, y, 37, 37) 
-
-
-    node_text = font.render(txt, True, (0,0,0))
-    nodes_text.append({'text':node_text, 'dragging':False, 'pos':(x+12, y+12), 'id':txt})
-
-    nodes.append({'rect':rectangle, 'dragging':False, 'color':color, 'id':txt})
-
-
-# Initialize Screen
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-
-WHITE = (255, 255, 255)
-RED   = (255, 0, 0)
-GREEN   = (0, 255, 0)
-BLUE   = (0, 0, 255)
-
-FPS = 60
-pygame.init()
-font = pygame.font.Font("freesansbold.ttf", 15)
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Graph")
-# Initialize Screen
-
-
-addnodebutton = pygame.rect.Rect(740, 555, 50, 37)  # Add Node Button
-
-clock = pygame.time.Clock()
-
-running = True
-
-while running:
-
-    for event in pygame.event.get():
-
-        mx, my = pygame.mouse.get_pos()
-
-        if event.type == pygame.QUIT:
-            running = False
-
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-
-                if addnodebutton.collidepoint(event.pos):  # Add Node Button
-                    addnode()
-
-                else:  # Dragging
-                    for node in nodes:
-                        if node['rect'].collidepoint(event.pos):
-                            node['dragging'] = True
-                            mouse_x, mouse_y = event.pos
-                            offset_x = node['rect'].x - mouse_x
-                            offset_y = node['rect'].y - mouse_y
-
-        elif event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 1:            
-                for node in nodes:
-                    if node['rect'].collidepoint(event.pos):
-                        node['dragging'] = False
-    
-                        for t in nodes_text:  # Move Text
-                            if (t['id']==node['id']):
-                                t['pos'] = (node['rect'][0]+12, node['rect'][1]+12)
-                                break
-
-        elif event.type == pygame.MOUSEMOTION:
-            for node in nodes:
-                if node['dragging']:
-                    mouse_x, mouse_y = event.pos
-                    node['rect'].x = mouse_x + offset_x
-                    node['rect'].y = mouse_y + offset_y
-        
-        
-        #print(x,y)
-        elif event.type == pygame.KEYDOWN:
-            if pygame.key.name(event.key)=='a':
-                for node in nodes:
-                    if node['rect'].collidepoint((mx, my)):
-                        print(node['id'])
-
-    screen.fill(WHITE)
-
-    pygame.draw.rect(screen, GREEN, addnodebutton)
-
-    for i in nodes:
-        pygame.draw.rect(screen, i['color'], i['rect'])
-        
-
-    for i in nodes_text:
-        screen.blit(i['text'], i['pos'])
-
-    pygame.display.flip()
-
-
-
-    clock.tick(FPS)
-
-
-pygame.quit()
+def bfs_shortest_path(graph, start, goal):
+    # keep track of explored nodes
+    explored = []
+    # keep track of all the paths to be checked
+    queue = [[start]]
+ 
+    # return path if start is goal
+    if start == goal:
+        return "That was easy! Start = goal"
+ 
+    # keeps looping until all possible paths have been checked
+    while queue:
+        # pop the first path from the queue
+        path = queue.pop(0)
+        # get the last node from the path
+        node = path[-1]
+        if node not in explored:
+            
+            neighbours = graph[node]
+            print('node',node)
+            # go through all neighbour nodes, construct a new path and
+            # push it into the queue
+            for neighbour in neighbours:
+                print(neighbour)
+                new_path = list(path)
+                new_path.append(neighbour)
+                queue.append(new_path)
+                # return path if neighbour is goal
+                if neighbour == goal:
+                    return new_path
+ 
+            # mark node as explored
+            explored.append(node)
+ 
+    # in case there's no path between the 2 nodes
+    return "So sorry, but a connecting path doesn't exist :("
+ 
+print(bfs_shortest_path(graph, 'G', 'D'))
