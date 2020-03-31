@@ -37,7 +37,7 @@ def addnode():
     x, y = randomposition()
     color = randomcolor()
     txt = chr(len(nodes)+65)
-    rectangle = pygame.rect.Rect(x, y, 37, 37) 
+    rectangle = pygame.rect.Rect(x, y, 37, 37)
 
     node_text = font.render(txt, True, (0,0,0))
     nodes_text.append({'text':node_text, 'dragging':False, 'pos':(x+12, y+12), 'id':txt})
