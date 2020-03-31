@@ -1,4 +1,4 @@
-# Algorithm Visualization
+# Algorithm Visualization Python3
  Draw Graphs and Visualize Algorithms (Python3)
  
  Built using the Pygame Library
