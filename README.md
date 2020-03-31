@@ -16,3 +16,11 @@
 ```Press 'space' to print the current graph```
 
 Path will be drawn using red color
+
+Breadth First Search:
+
+![Breadth First Search](https://github.com/hasnainroopawalla/Algorithm-Visualization/blob/master/images/bfs.gif)
+
+Depth First Search:
+
+![Depth First Search](https://github.com/hasnainroopawalla/Algorithm-Visualization/blob/master/images/dfs.gif)
