@@ -1,5 +1,9 @@
 # Algorithm Visualization
- Draw Graphs and Visualize Algorithms
+ Draw Graphs and Visualize Algorithms (Python3)
+ 
+ Built using the Pygame Library
+ 
+ ```pip install pygame```
 
 # Graph Traversal
 
