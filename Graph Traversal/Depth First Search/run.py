@@ -59,7 +59,7 @@ FPS = 60
 pygame.init()
 font = pygame.font.Font("freesansbold.ttf", 15)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Breadth First Search")
+pygame.display.set_caption("Depth First Search")
 addnodebutton = pygame.rect.Rect(740, 555, 50, 37)  # Add Node Button
 # Initialize Screen
 
