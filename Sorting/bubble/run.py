@@ -5,7 +5,7 @@ import time
 
 num = []
 plotnum = []
-NUMBER_OF_ELEMENTS = 200
+NUMBER_OF_ELEMENTS = 300
 
 def genlist():
     num = []
@@ -48,13 +48,12 @@ while running:
 
             if pygame.key.name(event.key)=='return':
                 c = 1
+                start = time.time()
                 plotnum = bubble.sortnum(num)
+                end = time.time()
                 
     screen.fill(WHITE)
 
-    # pygame.draw.rect(screen, GREEN, addnodebutton)
-    # screen.blit(font.render('Press Enter to start sorting', True, (0,0,0)), (800, 557))
-    # screen.blit(font.render('Press Space to shuffle numbers', True, (0,0,0)), (767, 579))
     if c==0:
         for i in range(len(num)):
             pygame.draw.line(screen, (255,0,0), (i, SCREEN_HEIGHT), (i, SCREEN_HEIGHT-num[i]))
@@ -65,9 +64,8 @@ while running:
                 pygame.draw.line(screen, (255,0,0), (j, SCREEN_HEIGHT), (j, SCREEN_HEIGHT-i[j]))
                 pygame.display.flip()
             screen.fill(WHITE)
-            #time.sleep(0.05)
         c = 0
-        print('Sorted')
+        print('Done. Number of Elements:',NUMBER_OF_ELEMENTS, '. Time Taken:', round(end-start,4),'sec')
 
     pygame.display.flip()
     clock.tick(FPS)
