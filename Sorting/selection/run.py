@@ -15,6 +15,7 @@ def genlist():
     return num
 
 WHITE = (255, 255, 255)
+RED = (255,0,0)
 
 # Initialize Screen
 SCREEN_WIDTH = NUMBER_OF_ELEMENTS
@@ -25,7 +26,7 @@ pygame.init()
 
 font = pygame.font.Font("freesansbold.ttf", 15)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Bubble Sort")
+pygame.display.set_caption("Selection Sort")
 # Initialize Screen
 
 clock = pygame.time.Clock()
@@ -56,16 +57,16 @@ while running:
 
     if c==0:
         for i in range(len(num)):
-            pygame.draw.line(screen, (255,0,0), (i, SCREEN_HEIGHT), (i, SCREEN_HEIGHT-num[i]))
+            pygame.draw.line(screen, RED, (i, SCREEN_HEIGHT), (i, SCREEN_HEIGHT-num[i]))
 
     else:
         for i in plotnum:
             for j in range(len(i)):
-                pygame.draw.line(screen, (255,0,0), (j, SCREEN_HEIGHT), (j, SCREEN_HEIGHT-i[j]))
+                pygame.draw.line(screen, RED, (j, SCREEN_HEIGHT), (j, SCREEN_HEIGHT-i[j]))
                 pygame.display.flip()
             screen.fill(WHITE)
         c = 0
-        print('Done. Number of Elements:',NUMBER_OF_ELEMENTS, '. Time Taken:', round(end-start,4),'sec')
+        print('\nSelection Sort:-\nNumber of Elements:',NUMBER_OF_ELEMENTS, '. Time Taken:', round(end-start,4),'sec')
 
     pygame.display.flip()
     clock.tick(FPS)

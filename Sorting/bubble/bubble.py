@@ -1,15 +1,10 @@
-
-def sortnum(arr):
-    
-    n = len(arr)
+def sortnum(a): 
+    n = len(a)
     snum = []
-    #snum.append(arr)
     for i in range(n):
         for j in range(0, n-i-1):
-            if arr[j] > arr[j+1] :
-                arr[j], arr[j+1] = arr[j+1], arr[j]
+            if a[j] > a[j+1] :
+                a[j], a[j+1] = a[j+1], a[j]
         
-        snum.append(list(arr))
-        
-
+        snum.append(list(a))
     return snum

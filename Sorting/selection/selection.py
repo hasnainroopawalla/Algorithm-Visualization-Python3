@@ -1,12 +1,12 @@
-def sortnum(arr):
+def sortnum(a):
     snum = []
-    for i in range(len(arr)): 
+    for i in range(len(a)): 
         min_idx = i 
-        for j in range(i+1, len(arr)): 
-            if arr[min_idx] > arr[j]: 
+        for j in range(i+1, len(a)): 
+            if a[min_idx] > a[j]: 
                 min_idx = j       
         
-        arr[i], arr[min_idx] = arr[min_idx], arr[i] 
-        snum.append(list(arr))     
+        a[i], a[min_idx] = a[min_idx], a[i] 
+        snum.append(list(a))     
    
     return snum

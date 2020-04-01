@@ -1,6 +1,6 @@
 import pygame
 import random
-import bubble
+import insertion
 import time
 
 num = []
@@ -15,7 +15,7 @@ def genlist():
     return num
 
 WHITE = (255, 255, 255)
-RED = (255, 0, 0)
+RED = (255, 0 , 0)
 
 # Initialize Screen
 SCREEN_WIDTH = NUMBER_OF_ELEMENTS
@@ -26,7 +26,7 @@ pygame.init()
 
 font = pygame.font.Font("freesansbold.ttf", 15)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Bubble Sort")
+pygame.display.set_caption("Insertion Sort")
 # Initialize Screen
 
 clock = pygame.time.Clock()
@@ -50,7 +50,7 @@ while running:
             if pygame.key.name(event.key)=='return':
                 c = 1
                 start = time.time()
-                plotnum = bubble.sortnum(num)
+                plotnum = insertion.sortnum(num)
                 end = time.time()
                 
     screen.fill(WHITE)
@@ -66,7 +66,7 @@ while running:
                 pygame.display.flip()
             screen.fill(WHITE)
         c = 0
-        print('\nBubble Sort:-\nNumber of Elements:',NUMBER_OF_ELEMENTS, '. Time Taken:', round(end-start,4),'sec')
+        print('\nInsertion Sort:-\nNumber of Elements:',NUMBER_OF_ELEMENTS, '. Time Taken:', round(end-start,4),'sec')
 
     pygame.display.flip()
     clock.tick(FPS)
