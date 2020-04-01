@@ -13,7 +13,6 @@ def shellSort(a, n):
             snum.append(list(a))
         gap //= 2
         
-
 def sortnum(a):
     size = len(a)
     shellSort(a, size)
