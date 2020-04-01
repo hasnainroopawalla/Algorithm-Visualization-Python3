@@ -1,11 +1,11 @@
 import pygame
 import random
-import cocktailsort
+import heapsort
 import time
 
 num = []
 plotnum = []
-NUMBER_OF_ELEMENTS = 800
+NUMBER_OF_ELEMENTS = 200
 
 def genlist():
     num = []
@@ -26,7 +26,7 @@ pygame.init()
 
 font = pygame.font.Font("freesansbold.ttf", 15)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Cocktail Shaker Sort")
+pygame.display.set_caption("Heap Sort")
 # Initialize Screen
 
 clock = pygame.time.Clock()
@@ -50,7 +50,7 @@ while running:
             if pygame.key.name(event.key)=='return':
                 c = 1
                 start = time.time()
-                plotnum = cocktailsort.sortnum(num)
+                plotnum = heapsort.sortnum(num)
                 end = time.time()
                 
     screen.fill(WHITE)
@@ -66,7 +66,7 @@ while running:
                 pygame.display.flip()
             screen.fill(WHITE)
         c = 0
-        print('\nCocktail Shaker Sort:-\nNumber of Elements:',NUMBER_OF_ELEMENTS, '. Time Taken:', round(end-start,4),'sec')
+        print('\nHeap Sort:-\nNumber of Elements:',NUMBER_OF_ELEMENTS, '. Time Taken:', round(end-start,4),'sec')
 
     pygame.display.flip()
     clock.tick(FPS)
