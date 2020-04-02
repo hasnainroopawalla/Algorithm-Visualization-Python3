@@ -5,7 +5,7 @@ import time
 
 num = []
 plotnum = []
-NUMBER_OF_ELEMENTS = 200
+NUMBER_OF_ELEMENTS = 500
 
 def genlist():
     num = []
