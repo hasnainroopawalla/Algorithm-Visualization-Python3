@@ -28,3 +28,28 @@ Breadth First Search:
 Depth First Search:
 
 ![Depth First Search](https://github.com/hasnainroopawalla/Algorithm-Visualization/blob/master/images/dfs.gif)
+
+# Sorting
+* Insertion Sort
+* Bubble Sort
+* Heap Sort
+* Counting Sort
+* Cocktail Shaker Sort
+* Merge Sort
+* Shell Sort
+* Selection Sort
+* Quick Sort
+
+Execute _run.py_ from every folder
+
+```Press 'space' to shuffle the list```
+
+Modify the 'NUMBER_OF_ELEMENTS' variable in _run.py_ to increase/decrease the number of elements
+
+Insertion Sort:
+
+![Insertion Sort](https://github.com/hasnainroopawalla/Algorithm-Visualization/blob/master/images/insertion.gif)
+
+Bubble Sort:
+
+![Bubble Sort](https://github.com/hasnainroopawalla/Algorithm-Visualization/blob/master/images/bubble.gif)
