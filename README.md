@@ -44,6 +44,8 @@ Execute _run.py_ from every folder
 
 ```Press 'space' to shuffle the list```
 
+```Press 'Enter' to begin sorting ```
+
 Modify the 'NUMBER_OF_ELEMENTS' variable in _run.py_ to increase/decrease the number of elements
 
 Insertion Sort:
